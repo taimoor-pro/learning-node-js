@@ -1,4 +1,5 @@
 // Routing (e.g. http://127.0.0.1:8000)
+
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
@@ -11,7 +12,8 @@ const replaceTemplate = require('./modules/replaceTemplate');
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const productData = JSON.parse(data);
 
-const slugs = productData.map((el) => el.productName);
+const slugs = productData.map((el) => slugify(el.productName, { lower: true }));
+console.log(slugs);
 
 const templateOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
